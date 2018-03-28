@@ -1,0 +1,5 @@
+*.bin
+*.swp
+re.*
+.idea/
+__pycache__/
