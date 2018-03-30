@@ -5,9 +5,9 @@ def main():
     parser = argparse.ArgumentParser(description='LZSS encoder/decoder')
     parser.add_argument("mode", type=str, choices=["encode", "decode"],
                         help="set mode, encode for encoding, decode for decoding")
-    parser.add_argument("input", type=str,
+    parser.add_argument("--input", type=str,
                         help="path to input file")
-    parser.add_argument("output", type=str,
+    parser.add_argument("--output", type=str,
                         help="path to output file")
 
     args = parser.parse_args()

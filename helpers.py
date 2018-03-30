@@ -1,3 +1,6 @@
+import sys
+import contextlib
+
 class Reference():
     """Just a wrapper - no data validation"""
 
@@ -69,3 +72,35 @@ class CircularBuffer():
     def pop(self):
         """remove first element and return it"""
         return self._buffer.pop(0)
+
+
+class SmartOpener():
+    #https://stackoverflow.com/a/17603000
+
+    @staticmethod
+    @contextlib.contextmanager
+    def smart_write(filename=None, mode='wb'):
+        if filename and filename != '-':
+            fh = open(file=filename, mode=mode)
+        else:
+            fh = sys.stdout.buffer
+
+        try:
+            yield fh
+        finally:
+            if fh is not sys.stdout.buffer:
+                fh.close()
+
+    @staticmethod
+    @contextlib.contextmanager
+    def smart_read(filename=None, mode='rb'):
+        if filename and filename != '-':
+            fh = open(file=filename, mode=mode)
+        else:
+            fh = sys.stdin.buffer
+
+        try:
+            yield fh
+        finally:
+            if fh is not sys.stdin.buffer:
+                fh.close()

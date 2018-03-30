@@ -1,5 +1,5 @@
 import bitio
-from helpers import CircularBuffer, Reference
+from helpers import CircularBuffer, Reference, SmartOpener
 
 class Encoder():
 
@@ -29,7 +29,7 @@ class Encoder():
     def encode(self, inpath, outpath):
         dictionary = CircularBuffer(self.DICTIONARY_SIZE)
         buffer = CircularBuffer(self.MAX_MATCH_SIZE)
-        with open(inpath, 'rb') as infile, open(outpath, 'wb') as outfile:
+        with SmartOpener.smart_read(inpath) as infile, SmartOpener.smart_write(outpath) as outfile:
             with bitio.BitWriter(outfile) as writer:
                 for i in range(0, self.MAX_MATCH_SIZE): #read max allowable match as initial buffer value
                     buffer.put_byte(self._byte2int(infile.read(1)))
@@ -51,7 +51,7 @@ class Encoder():
 
     def decode(self, inpath, outpath):
         dictionary = CircularBuffer(self.DICTIONARY_SIZE)
-        with open(inpath, 'rb') as infile, open(outpath, 'wb') as outfile:
+        with SmartOpener.smart_read(inpath) as infile, SmartOpener.smart_write(outpath) as outfile:
             with bitio.BitReader(infile) as reader, bitio.BitWriter(outfile) as writer:
                 while True:
                     bit = reader.readbits(1)
