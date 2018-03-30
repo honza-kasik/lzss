@@ -1,22 +1,24 @@
 # LZSS
 
-This is naive* implementation of LZSS compression algorithm
+This is naive* implementation of [LZSS](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Storer%E2%80%93Szymanski) compression algorithm
 
 ## How to run
 
 To encode:
 
 ```
-python3 main.py <input> <output>
+python3 main.py encode <input> <output>
 ```
 
 To decode:
 
-TBD
+```
+python3 main.py decode <input> <output>
+```
 
 ## How LZSS works
 
-As any other dictionary based LZ*+ method, this one too uses already read symbols stashed in dictionary to compress data.
+As any other dictionary based `LZ.+` method, this one too uses already read symbols stashed in dictionary to compress data.
 
 ### During encoding, these steps are made:
 
@@ -32,7 +34,7 @@ As any other dictionary based LZ*+ method, this one too uses already read symbol
 
 ### Decoding:
 
-Decoding is much similar to encoding, but no searches for longest match are made. See code for yourself.
+Decoding is much similar to encoding, but no searches for longest match are made. See code (`encoder.py`) for yourself.
 
 
 ### Resources:
