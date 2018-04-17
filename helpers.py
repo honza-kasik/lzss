@@ -88,7 +88,7 @@ class SmartOpener():
         try:
             yield fh
         finally:
-            if fh is not sys.stdout.buffer:
+            if fh is not sys.stdout:
                 fh.close()
 
     @staticmethod
